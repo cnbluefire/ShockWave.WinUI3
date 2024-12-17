@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "ShockWave.App (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "ShockWave.App (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}

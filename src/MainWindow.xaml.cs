@@ -74,7 +74,7 @@ namespace ShockWave.App
                 pixelShaderEffect.Properties["CenterPoint"] = new System.Numerics.Vector2(0.5f, 0.5f);
                 pixelShaderEffect.Properties["Ratio"] = 1f;
             }
-            const double durationSeconds = 3d;
+            const double durationSeconds = 2d;
 
             var centerPoint = this.centerPoint;
             this.centerPoint = null;
@@ -93,9 +93,17 @@ namespace ShockWave.App
 
             pixelShaderEffect.Source1 = canvasBitmap;
 
+            var distRect = new Windows.Foundation.Rect(default, sender.Size);
+
+            args.DrawingSession.DrawImage(canvasBitmap, distRect);
+
             args.DrawingSession.DrawImage(
-                pixelShaderEffect,
-                new Windows.Foundation.Rect(default, sender.Size),
+                new DpiCompensationEffect()
+                {
+                    Source = pixelShaderEffect,
+                    SourceDpi = new System.Numerics.Vector2(96f, 96f)
+                },
+                distRect,
                 new Windows.Foundation.Rect(default, canvasBitmap.Size));
         }
 
